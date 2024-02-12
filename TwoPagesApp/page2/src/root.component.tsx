@@ -1,8 +1,8 @@
 import './App.css'
-export default function Root(props) {
+export default function Root() {
   return (
     <div className="container2">
-    <p>Page 2 App</p>
+    <p className=' underline'>Page 2 App</p>
   </div>
   );
 }
