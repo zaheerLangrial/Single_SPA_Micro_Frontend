@@ -1,17 +1,29 @@
-import { Space, Table, Tag } from "antd";
+import { Space, Table, Button, Modal } from "antd";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
 export default function Root() {
-  const [employees , setEmployees] = useState()
+  const [employees, setEmployees] = useState([]);
+  const [selectedEmployee, setSelectedEmployee] = useState(null);
+  const [modalVisible, setModalVisible] = useState(false);
+
   useEffect(() => {
     fetchEmployees();
-  },[])
+  }, []);
+
   const fetchEmployees = async () => {
     const res = await axios.get('https://reqres.in/api/users');
-    setEmployees(res.data.data)
-    console.log(res.data.data)
+    setEmployees(res.data.data);
   }
+
+  const handleViewClick = (record) => {
+    setSelectedEmployee(record);
+    setModalVisible(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalVisible(false);
+  };
 
   const columns = [
     {
@@ -36,12 +48,32 @@ export default function Root() {
     },
     {
       title: 'Actions',
-      dataIndex: 'View',
-      key: 'View',
+      key: 'actions',
+      render: (text, record) => (
+        <Space size="middle">
+          <Button onClick={() => handleViewClick(record)}>View</Button>
+        </Space>
+      ),
     },
-
   ];
+
   return (
-    <Table dataSource={employees} columns={columns} />
+    <div>
+      <Table dataSource={employees} columns={columns} />
+      <Modal
+        title="Employee Details"
+        visible={modalVisible}
+        onCancel={handleCloseModal}
+        footer={null}
+      >
+        {selectedEmployee && (
+          <div>
+            <p>Name: {selectedEmployee.first_name} {selectedEmployee.last_name}</p>
+            <p>Email: {selectedEmployee.email}</p>
+            <img src={selectedEmployee.avatar} alt="Employee Avatar" style={{ maxWidth: '100%' }} />
+          </div>
+        )}
+      </Modal>
+    </div>
   );
 }

@@ -1,8 +1,8 @@
 import { BrowserRouter, Link } from "react-router-dom";
 import styled from "styled-components";
 
-const MainDiv = styled.div`
-height: 50px;
+const HeaderContainer = styled.div`
+  height: 50px;
   background-color: gray;
   display: flex;
   padding: 0 15px;
@@ -11,23 +11,37 @@ height: 50px;
   gap: 10px;
 `;
 
+const NavLinkContainer = styled.div`
+  display: flex;
+  gap: 5px;
+  color: white;
+`;
+
+const NavLink = styled(Link)`
+  color: white;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
 export default function Root(props) {
   return (
     <BrowserRouter>
-    <MainDiv>
-      {/* <h1>{props.name}</h1> */}
-      <Link to={'/'}>
-        Employee App
-      </Link>
-        <div style={{display : "flex" , gap : 5 ,color : "white" ,}}>
-          <Link to={'/'}>
+      <HeaderContainer>
+        <Link to={'/'}>
+          Employee App
+        </Link>
+        <NavLinkContainer>
+          <NavLink to={'/'}>
             Home
-          </Link>
-          <Link to={'/employees'}>
+          </NavLink>
+          <NavLink to={'/employees'}>
             Employees
-          </Link>
-        </div>
-    </MainDiv>
+          </NavLink>
+        </NavLinkContainer>
+      </HeaderContainer>
     </BrowserRouter>
   );
 }
