@@ -17,9 +17,14 @@
 
   -->
 
+  <application name="@os/app-header"></application>
   <main>
     <route default>
       <application name="@single-spa/welcome"></application>
     </route>
+    <route path="/shop">
+      <application name="@os/app-shop"></application>
+    </route>
   </main>
+  <application name="@os/app-footer"></application>
 </single-spa-router>

@@ -1,7 +1,7 @@
 {
-  "name": "@os/app-header",
+  "name": "@os/app-footer",
   "scripts": {
-    "start": "webpack serve --port 8100",
+    "start": "webpack serve --port 8110",
     "start:standalone": "webpack serve --env standalone",
     "build": "concurrently npm:build:*",
     "build:webpack": "webpack --mode=production",
@@ -11,6 +11,7 @@
     "check-format": "prettier --check .",
     "test": "cross-env BABEL_ENV=test jest",
     "watch-tests": "cross-env BABEL_ENV=test jest --watch",
+    "prepare": "husky install",
     "coverage": "cross-env BABEL_ENV=test jest --coverage",
     "build:types": "tsc"
   },
@@ -59,5 +60,5 @@
     "single-spa-react": "^4.3.1",
     "styled-components": "^6.1.8"
   },
-  "types": "dist/os-app-header.d.ts"
+  "types": "dist/os-app-footer.d.ts"
 }
